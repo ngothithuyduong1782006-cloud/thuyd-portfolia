@@ -9,19 +9,20 @@ const services = [
 ];
 
 const ServicesSection = () => (
-  <section className="section-padding">
-    <div className="container mx-auto">
+  <section className="section-padding relative overflow-hidden">
+    <div className="container mx-auto relative z-10">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         className="text-center mb-16"
       >
-        <span className="text-secondary font-semibold text-sm uppercase tracking-widest">Services</span>
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-2">What I Can Contribute</h2>
+        <span className="text-secondary font-black text-xs uppercase tracking-[0.3em]">Services</span>
+        <h2 className="text-4xl md:text-5xl font-black text-white mt-4">What I Can Contribute</h2>
+        <div className="w-20 h-1.5 bg-gradient-to-r from-secondary to-primary mx-auto mt-6 rounded-full" />
       </motion.div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
         {services.map((s, i) => (
           <motion.div
             key={s.title}
@@ -29,14 +30,13 @@ const ServicesSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="bg-card rounded-2xl border border-border p-6 text-center hover:border-secondary hover:-translate-y-1 transition-all group"
-            style={{ boxShadow: "var(--shadow-card)" }}
+            className="glass-card p-8 text-center hover:border-primary/50 hover:-translate-y-2 transition-all group"
           >
-            <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-secondary/20 transition-colors">
-              <s.icon className="w-7 h-7 text-secondary" />
+            <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6 group-hover:bg-primary group-hover:scale-110 transition-all shadow-[0_0_20px_rgba(0,242,254,0.2)]">
+              <s.icon className="w-8 h-8 text-primary group-hover:text-black transition-colors" />
             </div>
-            <h3 className="font-display font-bold text-foreground mb-2">{s.title}</h3>
-            <p className="text-muted-foreground text-sm">{s.desc}</p>
+            <h3 className="text-xl font-bold font-sans text-white mb-3 uppercase tracking-tight">{s.title}</h3>
+            <p className="text-muted-foreground text-sm leading-relaxed">{s.desc}</p>
           </motion.div>
         ))}
       </div>

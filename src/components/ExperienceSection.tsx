@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Briefcase } from "lucide-react";
+import { GlassCard } from "./ui/GlassCard";
 
 const experiences = [
   {
@@ -27,7 +28,7 @@ const experiences = [
 ];
 
 const ExperienceSection = () => (
-  <section id="experience" className="section-padding bg-card">
+  <section id="experience" className="section-padding">
     <div className="container mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -35,40 +36,46 @@ const ExperienceSection = () => (
         viewport={{ once: true }}
         className="text-center mb-16"
       >
-        <span className="text-secondary font-semibold text-sm uppercase tracking-widest">Experience</span>
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-2">Where I've Contributed</h2>
+        <span className="text-primary font-black text-xs uppercase tracking-[0.3em]">Experience</span>
+        <h2 className="text-4xl md:text-5xl font-black text-white mt-4">Where I've Contributed</h2>
+        <div className="w-20 h-1.5 bg-gradient-to-r from-primary to-secondary mx-auto mt-6 rounded-full" />
       </motion.div>
 
-      <div className="max-w-3xl mx-auto space-y-8">
+      <div className="max-w-4xl mx-auto space-y-10">
         {experiences.map((exp, i) => (
-          <motion.div
+          <GlassCard
             key={i}
-            initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="bg-background rounded-2xl border border-border p-6 md:p-8 hover:border-secondary transition-colors"
-            style={{ boxShadow: "var(--shadow-card)" }}
+            className="p-8 md:p-10 hover:border-primary/40 transition-all relative overflow-hidden group"
           >
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-lg bg-secondary/20 flex items-center justify-center flex-shrink-0">
-                <Briefcase className="w-6 h-6 text-secondary" />
+            <div className="flex flex-col md:flex-row items-start gap-6 relative z-10">
+              <div className="w-14 h-14 rounded-xl bg-secondary/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                <Briefcase className="w-7 h-7 text-secondary" />
               </div>
-              <div>
-                <h3 className="font-display text-lg font-bold text-foreground">{exp.role}</h3>
-                <p className="text-secondary font-semibold text-sm">{exp.org}</p>
-                <p className="text-muted-foreground text-xs mt-1">{exp.period}</p>
+              <div className="flex-1">
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <div>
+                    <h3 className="text-2xl font-bold font-sans text-white">{exp.role}</h3>
+                    <p className="text-primary font-bold text-base mt-1 uppercase tracking-wider">{exp.org}</p>
+                  </div>
+                  <span className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/60 text-xs font-bold whitespace-nowrap">
+                    {exp.period}
+                  </span>
+                </div>
+
+                <ul className="mt-8 space-y-4">
+                  {exp.points.map((point, j) => (
+                    <li key={j} className="flex items-start gap-4 text-muted-foreground text-base group/item">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0 group-hover/item:scale-150 transition-transform shadow-[0_0_8px_rgba(0,242,254,0.6)]" />
+                      <span className="group-hover/item:text-white/90 transition-colors">{point}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
-            <ul className="mt-5 space-y-2">
-              {exp.points.map((point, j) => (
-                <li key={j} className="flex items-start gap-2 text-muted-foreground text-sm">
-                  <span className="w-1.5 h-1.5 rounded-full bg-secondary mt-2 flex-shrink-0" />
-                  {point}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+
+            {/* Background accent */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/5 rounded-full blur-[100px] -z-10 group-hover:bg-secondary/10 transition-colors" />
+          </GlassCard>
         ))}
       </div>
     </div>
